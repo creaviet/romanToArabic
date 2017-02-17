@@ -119,7 +119,7 @@ describe('Roman Numbers to Arabic Numbers', function () {
   });
 });
 
-function basicNumber(romanNumber) {
+function toArabNum(romanNumber) {
   let returnValue = null;
   switch (romanNumber) {
   case 'I':
@@ -153,16 +153,14 @@ function romantoarabic(romanNumber) {
   if (!romanNumber) {
     return undefined;
   }
-  let translatedArabicNumber = 0;
+  let arabNumber = 0;
   for (let i = romanNumber.length - 1; i >= 0; i--) {
-    if (basicNumber(romanNumber[i + 1]) > basicNumber(romanNumber[i])) {
-      translatedArabicNumber -= basicNumber(romanNumber[i]);
-    } else {
-      translatedArabicNumber += basicNumber(romanNumber[i]);
-    }
-    if (isNaN(translatedArabicNumber)) {
+    if (isNaN(toArabNum(romanNumber[i]))) {
       return undefined;
     }
+    arabNumber = (toArabNum(romanNumber[i + 1]) > toArabNum(romanNumber[i])) ?
+      arabNumber - toArabNum(romanNumber[i]) :
+      arabNumber + toArabNum(romanNumber[i]);
   }
-  return translatedArabicNumber;
+  return arabNumber;
 }
