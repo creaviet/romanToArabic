@@ -105,6 +105,17 @@ describe('Roman Numbers to Arabic Numbers', function () {
     it('should return 1876 for MDCCCLXXVI', function () {
       assert.equal(1876, romantoarabic('MDCCCLXXVI'));
     });
+    it('should return 1712 for MDCCXII', function () {
+      assert.equal(1712, romantoarabic('MDCCXII'));
+    });
+    it('should return 1234 for MCCXXXIV', function () {
+      assert.equal(1234, romantoarabic('MCCXXXIV'));
+    });
+    it(
+      'should return undefined for invalid argument, e.g. M9X XXIV',
+      function () {
+        assert.equal(undefined, romantoarabic('M9X XXIV'));
+      });
   });
 });
 
@@ -134,35 +145,24 @@ function basicNumber(romanNumber) {
     break;
   default:
     returnValue = undefined;
-    break;
   }
   return returnValue;
 }
 
 function romantoarabic(romanNumber) {
-  let translatedArabicNumber = null;
-  let arabicNumberArray = [];
-  let operationsArray = [];
   if (!romanNumber) {
     return undefined;
   }
-  let romanNumberLength = romanNumber.length;
-  if (romanNumberLength === 1) {
-    return basicNumber(romanNumber);
-  } else if (romanNumberLength === 2) {
-    if (basicNumber(romanNumber[1]) > basicNumber(romanNumber[0])) {
-      return basicNumber(romanNumber[1]) - basicNumber(romanNumber[0]);
+  let translatedArabicNumber = 0;
+  for (let i = romanNumber.length - 1; i >= 0; i--) {
+    if (basicNumber(romanNumber[i + 1]) > basicNumber(romanNumber[i])) {
+      translatedArabicNumber -= basicNumber(romanNumber[i]);
+    } else {
+      translatedArabicNumber += basicNumber(romanNumber[i]);
     }
-    return basicNumber(romanNumber[1]) + basicNumber(romanNumber[0]);
-  } else if (romanNumberLength > 2) {
-    let translatedArabicNumber = 0;
-    for (let i = romanNumberLength - 1; i >= 0; i--) {
-      if (basicNumber(romanNumber[i + 1]) > basicNumber(romanNumber[i])) {
-        translatedArabicNumber -= basicNumber(romanNumber[i]);
-      } else {
-        translatedArabicNumber += basicNumber(romanNumber[i]);
-      }
+    if (isNaN(translatedArabicNumber)) {
+      return undefined;
     }
-    return translatedArabicNumber;
   }
+  return translatedArabicNumber;
 }
