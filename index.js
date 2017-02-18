@@ -16,7 +16,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const promptQuestion = colors.red(
+const promptQuestion = colors.blue(
     "\nEine gültige römische Zahl eingeben, z.B. 'M', 'IX', usw.\n") +
   colors.white(
     "(um zu beenden, bitte 'ciao' eingeben): \n");
@@ -25,7 +25,7 @@ const infiniteReadLine = function () {
   rl.question(promptQuestion, function (
     romanNumber) {
     if (romanNumber === 'ciao') {
-      log(colors.magenta(figlet.textSync('\nArrivederci!', {
+      log(colors.magenta(figlet.textSync('\nArrivederci! : )', {
         horizontalLayout: 'default',
         verticalLayout: 'default'
       })));
@@ -41,7 +41,12 @@ const infiniteReadLine = function () {
     log(colors.cyan("Die römische Zahl (deine Eingabe): "));
     log(colors.green(figlet.textSync(romanNumber)));
     log(colors.cyan("\n=> arabische Zahl (das Ergebnis): "));
-    log(colors.green(figlet.textSync(convert.romantoarabic(romanNumber))));
+    const resultArabNumber = convert.romantoarabic(romanNumber);
+    resultArabNumber ?
+      log(colors.green(figlet.textSync(resultArabNumber))) :
+      log(colors.red(
+        "Ungülitge Eingabe. Bitte nur gültige römische Zahlen eingeben (Groß- oder Kleinschreibung): I, V, X, L, C, D, M"
+      ));
     infiniteReadLine();
   });
 };
