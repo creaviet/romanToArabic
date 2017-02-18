@@ -1,6 +1,10 @@
 'use strict';
 
 function toArabNum(romanNumber) {
+  if (!romanNumber) {
+    return undefined;
+  }
+  romanNumber = romanNumber.toUpperCase();
   let returnValue = null;
   switch (romanNumber) {
   case 'I':
