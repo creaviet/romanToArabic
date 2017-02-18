@@ -1,54 +1,49 @@
 'use strict';
 const convert = require('./convert');
+const prompt = require("prompt");
+const colors = require("colors/safe");
+const readline = require('readline');
+const log = console.log;
+const figlet = require('figlet');
 
-var prompt = require("prompt");
-var colors = require("colors/safe");
-//
-// Setting these properties customizes the prompt.
-//
-prompt.message = colors.white("Roman to arabic Number");
-prompt.delimiter = colors.green(":");
-/*
-prompt.start();
+log(colors.yellow(figlet.textSync('"Roman To Arabic"', {
+  horizontalLayout: 'default',
+  verticalLayout: 'default'
+})));
 
-prompt.get({
-  properties: {
-    name: {
-      description: colors.yellow(
-        "\nType in a valid roman number, e.g. 'M', 'IX', etc. ")
-    }
-  }
-}, function (err, result) {
-  console.log(colors.cyan("The roman number (your input): " + colors.green(
-      result.name) +
-    "\n=> arabic number (the result): " + colors.green(convert.romantoarabic(
-      result.name))));
-});*/
-
-var readline = require('readline');
-var log = console.log;
-
-var rl = readline.createInterface({
+const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-let promptQuestion = colors.red(
-  "\nType in a valid roman number, e.g. 'M', 'IX', etc.\n") + colors.grey(
-  "(in order to stop, type in 'ciao'): \n");
-var infiniteReadLine = function () {
+
+const promptQuestion = colors.red(
+    "\nEine gültige römische Zahl eingeben, z.B. 'M', 'IX', usw.\n") +
+  colors.white(
+    "(um zu beenden, bitte 'ciao' eingeben): \n");
+const infiniteReadLine = function () {
+
   rl.question(promptQuestion, function (
     romanNumber) {
     if (romanNumber === 'ciao') {
-      log(colors.green("Arrivederci! :) "));
+      log(colors.magenta(figlet.textSync('\nArrivederci!', {
+        horizontalLayout: 'default',
+        verticalLayout: 'default'
+      })));
+
       return rl.close();
     }
-    log(colors.yellow("\nRESULT"));
-    log(colors.cyan("The roman number (your input): " + colors.green(
-        romanNumber) +
-      "\n=> arabic number (the result): " + colors.green(convert.romantoarabic(
-        romanNumber))));
+
+    log(colors.yellow(figlet.textSync('\n= Ergebnis =', {
+      horizontalLayout: 'default',
+      verticalLayout: 'default'
+    })));
+
+    log(colors.cyan("Die römische Zahl (deine Eingabe): "));
+    log(colors.green(figlet.textSync(romanNumber)));
+    log(colors.cyan("\n=> arabische Zahl (das Ergebnis): "));
+    log(colors.green(figlet.textSync(convert.romantoarabic(romanNumber))));
     infiniteReadLine();
   });
 };
 
-infiniteReadLine(); //we have to actually start our recursion somehow
+infiniteReadLine();
