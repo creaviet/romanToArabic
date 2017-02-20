@@ -1,6 +1,6 @@
 'use strict';
 
-function toArabNum(romanNumber) {
+function _toArabNum(romanNumber) {
   if (!romanNumber) {
     return undefined;
   }
@@ -40,12 +40,12 @@ function romantoarabic(romanNumber) {
   }
   let arabNumber = 0;
   for (let i = romanNumber.length - 1; i >= 0; i--) {
-    if (isNaN(toArabNum(romanNumber[i]))) {
+    if (isNaN(_toArabNum(romanNumber[i]))) {
       return undefined;
     }
-    arabNumber = (toArabNum(romanNumber[i + 1]) > toArabNum(romanNumber[i])) ?
-      arabNumber - toArabNum(romanNumber[i]) :
-      arabNumber + toArabNum(romanNumber[i]);
+    arabNumber = (_toArabNum(romanNumber[i + 1]) > _toArabNum(romanNumber[i])) ?
+      arabNumber - _toArabNum(romanNumber[i]) :
+      arabNumber + _toArabNum(romanNumber[i]);
   }
   return arabNumber;
 }

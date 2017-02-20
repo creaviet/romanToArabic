@@ -93,35 +93,56 @@ describe('Roman Numbers to Arabic Numbers', function () {
       });
   });
   describe('Basic Combinations with more than two letter numbers', function () {
-    it('should return 3 for III', function () {
-      assert.strictEqual(3, convert.romantoarabic('III'));
-    });
-    it('should return 7 for VII', function () {
-      assert.strictEqual(7, convert.romantoarabic('VII'));
-    });
-    it('should return 8 for VIII', function () {
-      assert.strictEqual(8, convert.romantoarabic('VIII'));
-    });
-    it('should return 1984 for MCMLXXXIV', function () {
-      assert.strictEqual(1984, convert.romantoarabic('MCMLXXXIV'));
-    });
-    it('should return 1876 for MDCCCLXXVI', function () {
-      assert.strictEqual(1876, convert.romantoarabic('MDCCCLXXVI'));
-    });
-    it('should return 1712 for MDCCXII', function () {
-      assert.strictEqual(1712, convert.romantoarabic('MDCCXII'));
-    });
-    it('should return 2419 for MMCDXIX', function () {
-      assert.strictEqual(2419, convert.romantoarabic('MMCDXIX'));
-    });
-    it('should return 1234 for MCCXXXIV', function () {
-      assert.strictEqual(1234, convert.romantoarabic('MCCXXXIV'));
-    });
-    it(
-      'should return undefined for invalid argument, e.g. M9X XXIV',
-      function () {
-        assert.strictEqual(undefined, convert.romantoarabic(
-          'M9X XXIV'));
+    describe('valid combinations', function () {
+      it('should return 3 for III', function () {
+        assert.strictEqual(3, convert.romantoarabic('III'));
       });
+      it('should return 7 for VII', function () {
+        assert.strictEqual(7, convert.romantoarabic('VII'));
+      });
+      it('should return 8 for VIII', function () {
+        assert.strictEqual(8, convert.romantoarabic('VIII'));
+      });
+      it('should return 1984 for MCMLXXXIV', function () {
+        assert.strictEqual(1984, convert.romantoarabic(
+          'MCMLXXXIV'));
+      });
+      it('should return 1876 for MDCCCLXXVI', function () {
+        assert.strictEqual(1876, convert.romantoarabic(
+          'MDCCCLXXVI'));
+      });
+      it('should return 1712 for MDCCXII', function () {
+        assert.strictEqual(1712, convert.romantoarabic(
+          'MDCCXII'));
+      });
+      it('should return 2419 for MMCDXIX', function () {
+        assert.strictEqual(2419, convert.romantoarabic(
+          'MMCDXIX'));
+      });
+      it('should return 1234 for MCCXXXIV', function () {
+        assert.strictEqual(1234, convert.romantoarabic(
+          'MCCXXXIV'));
+      });
+    });
+    describe('invalid combnations', function () {
+      it(
+        'should return undefined for one invalid argument, e.g. MD XI',
+        function () {
+          assert.strictEqual(undefined, convert.romantoarabic(
+            'MD X9SXIV'));
+        });
+      it(
+        'should return undefined for multiple invalid argument, e.g. MD X9SXIV',
+        function () {
+          assert.strictEqual(undefined, convert.romantoarabic(
+            'MD X9SXIV'));
+        });
+      it(
+        'should return undefined for all invalid argument, e.g. asdf',
+        function () {
+          assert.strictEqual(undefined, convert.romantoarabic(
+            'asdf'));
+        });
+    });
   });
 });

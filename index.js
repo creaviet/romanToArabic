@@ -6,7 +6,7 @@ const readline = require('readline');
 const log = console.log;
 const figlet = require('figlet');
 
-log(colors.yellow(figlet.textSync('"Roman To Arabic"', {
+log(colors.yellow(figlet.textSync('Roman2Arabic', {
   horizontalLayout: 'default',
   verticalLayout: 'default'
 })));
